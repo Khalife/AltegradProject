@@ -3,12 +3,6 @@
 	The whole corpus is arranged into a dictionnary of labels and the documents.
 """
 
-# Defining the module
-import sys
-
-sys.path.append("./code/data/readData.py")
-
-
 # Loading the data
 
 def loadData(path,trainData):
@@ -20,24 +14,15 @@ def loadData(path,trainData):
 		returns a collection of documents(lists) and there labels.
 	"""
 
-	if trainData:
-		with open("r8_train_stemmed.txt", "r") as trainFile:
-			labels = []
-			documents = []
-			for line in trainFile:
-				content = line.split('\t')
+	with open(path ,"r") as File:
+		labels = []
+		documents = []
+		for line in File:
+			content = line.split('\t')
+			if trainData:
 				labels.append(content[0])
 				document = content[1:]
 				documents.append(document)
-			data = {"labels" : labels , "documents" : documents}
-
-	else:
-		with open("r8_test_stemmed.txt", "r") as testFile:
-			labels = []
-			documents = []
-			for line in testFile:
-				document = line.split('\t')
-				documents.append(document)
-			data = {"labels" : labels , "documents" : documents}
-
-	return data
+			else:
+				documents.append(content)
+		return {"labels" : labels , "documents" : documents}
