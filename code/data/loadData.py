@@ -41,13 +41,3 @@ def loadData(path,trainData):
 			data = {"labels" : labels , "documents" : documents}
 
 	return data
-
-
-
-data = loadData("r8_test_stemmed.txt",False);
-
-doc = data["documents"]
-d = doc[0];
-
-for w in d:
-	print w
