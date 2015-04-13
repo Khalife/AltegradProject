@@ -1,3 +1,5 @@
+
+from loadData import loadData
 import random as rnd
 from numpy import *
 import matplotlib.pyplot as plt
@@ -16,15 +18,15 @@ from sklearn import preprocessing
 
 
 
-## 1. Load data and use preprocessing
-lines = [line.strip() for line in open('r8_train_stemmed.txt')]
-labels = []
-contents = []
-for line in lines:
-    [label, content] = line.split('\t')
-    labels.append(label)
-    #contents.append(content.split(' '))
-    contents.append(content)
+# Load the train data
+
+trainData = True 
+path = "../data/r8_train_stemmed.txt"
+data = loadData(path,trainData)
+labels = data["labels"]
+contents = data["documents"]
+
+
 N = len(lines)
 #print shape(contents)
 vectorizer = CountVectorizer(min_df=1)
@@ -32,8 +34,13 @@ X_ = vectorizer.fit_transform(contents) # under Hashed form
 X=X_.toarray()	# under array form : Document Word Matrix
 
 # Perform dimensionality reduction over X (SVD)
+<<<<<<< HEAD:main.py
 # print shape(X)
 disp('Preprocessing...')
+=======
+#print shape(X)
+print "Preprocessing..."
+>>>>>>> bf1242a3f565f91aa5924b64dc4a77de4649a62c:code/BagOfWords/bagOfWords.py
 
 transformer = TfidfTransformer()
 Tfidf = transformer.fit_transform(X)
