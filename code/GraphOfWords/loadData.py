@@ -4,19 +4,24 @@ def loadData(path,trainData):
 			path: is the text path representing the data.
 			trainData: specifies the kind of data. If it is "True" then it is a train data.
 
-			returns: a collection of documents(lists) and there labels.
+			returns: a collection of documents(lists), there labels.
 	"""
 
 	with open(path ,"r") as File:
 		labels = []
 		documents = []
+		documentNumber = 1
 		for line in File:
 			content = line.split('\t')
 			if trainData:
-				labels.append(content[0])
-				document = content[1:]
-				documents.append(document[0])
+				label = (documentNumber , content[0])
+				labels.append(label)
+				document = (documentNumber , content[1:])
+				documents.append(document)
 			else:
-				documents.append(content)
+				document = (documentNumber , content)
+				documents.append(document)
+			documentNumber += 1
+
 	
 	return {"labels" : labels , "documents" : documents}
