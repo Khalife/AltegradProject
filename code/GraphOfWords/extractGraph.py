@@ -8,10 +8,14 @@ def extractGraph(document,window,directed,weighted):
 	"""def extractGraph(documentList):
 			document: is a string representing the document
 			window: is the number of words considered at a time 
+			directed: is a boolean that determines if the graph is directed
 			weighted: is a boolean determines if the graph is weighted
 
 			returns: a graph of words for the document.
 	"""
+
+	document = document[1][0]
+	documentNumber = document[0]
 
 	documentList = document.split()
 
@@ -33,7 +37,15 @@ def extractGraph(document,window,directed,weighted):
 					else:
 						G.add_edge( documentList[cursor] , documentList[cursor + iterator + 1] , weight=1)
 
-	return G
+	return (documentNumber , length , G)
+
+
+def extratGraphDefault(document):
+	window = 4
+	directed = True
+	weighted = False
+
+	return extractGraph(document,window,directed,weighted)
 
 path = '../data/r8_train_stemmed.txt'
 trainData = True
@@ -45,10 +57,8 @@ window = 4
 directed = True
 weighted = True
 
-G = extractGraph(document,window,directed,weighted)
+(documentNumber , length , G) = extractGraph(document,window,directed,weighted)
 print G.nodes()
-sett = set(document.split())
-print len(sett)
 print len(G.nodes())
 print G.edges()
 nx.draw(G)
