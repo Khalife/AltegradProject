@@ -14,8 +14,8 @@ def extractGraph(document,window,directed,weighted):
 			returns: a graph of words for the document.
 	"""
 
-	document = document[1][0]
 	documentNumber = document[0]
+	document = document[1][0]
 
 	documentList = document.split()
 
@@ -46,21 +46,3 @@ def extratGraphDefault(document):
 	weighted = False
 
 	return extractGraph(document,window,directed,weighted)
-
-path = '../data/r8_train_stemmed.txt'
-trainData = True
-
-data = loadData(path,trainData)
-
-document = data['documents'][54]
-window = 4
-directed = True
-weighted = True
-
-(documentNumber , length , G) = extractGraph(document,window,directed,weighted)
-print G.nodes()
-print len(G.nodes())
-print G.edges()
-nx.draw(G)
-plt.draw()
-plt.show()

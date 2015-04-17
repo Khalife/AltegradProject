@@ -25,12 +25,13 @@ def documentWordMatrix(documents , window , directed , weighted):
 	graphs = []
 	lengths = []
 	listOfWords = []
+	avdl = 0
 
 	for document in documents:
 		(documentNumber , length , G) = extractGraph(document,window,directed,weighted)
 		graphs.append( (documentNumber , G) )
 		lengths.append( (documentNumber , length) )
-		listOfWords += G.nodes
+		listOfWords += G.nodes()
 		avdl += length
 
 	words = list( set(listOfWords) )
@@ -46,9 +47,9 @@ def documentWordMatrix(documents , window , directed , weighted):
 			word = words[iterator]
 			if word in G.nodes():
 				DWM[documentNumber - 1][iterator] = G.in_degree(word) * (not weighted) * directed
-				[documentNumber - 1][iterator] = 1
+				presenceMatrix[documentNumber - 1][iterator] = 1
 
-	return (DWM , presenceMatrix , avdl, lengths,words)
+	return (DWM , presenceMatrix , avdl, lengths , words)
 
 
 path = '../data/r8_train_stemmed.txt'
@@ -60,5 +61,6 @@ documents = data['documents']
 
 directed = True
 weighted = False
+window =4
 
-DMW = documentWordMatrix(documents , directed , weighted)
+(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,window , directed , weighted)
