@@ -39,7 +39,7 @@ trainData = True
 
 data = loadData(path,trainData)
 
-documents = data['documents'][:10]
+documents = data['documents']
 
 directed = True
 weighted = False
@@ -49,4 +49,4 @@ parameter = .003
 
 (TWM , IDF , TW_IDF) = documentTermMatrix(documents , window , directed , weighted, parameter)
 
-print TW_IDF
+np.savetxt('twidf_window4_directed_weighted' , TW_IDF , delimiter = ',')
