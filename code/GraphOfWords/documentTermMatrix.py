@@ -20,7 +20,7 @@ def documentTermMatrix(documents , window , directed , weighted, parameter):
 	termDocumentOccurence = np.sum(presenceMatrix , axis = 0)
 	auxilary = numberOfDocuments * np.ones( numberOfWords )
 	IDF_ = np.divide(auxilary , termDocumentOccurence)
-	IDF = mtlib.repmat(IDF_ , numberOfDocuments)
+	IDF = mtlib.repmat(IDF_ , numberOfDocuments ,1)
 
 	pivotMatrix = np.array((numberOfDocuments , numberOfWords))
 	for length in lengths:
@@ -48,3 +48,5 @@ window = 4
 parameter = .003
 
 (TWM , IDF , TW_IDF) = documentTermMatrix(documents , window , directed , weighted, parameter)
+
+print TW_IDF
