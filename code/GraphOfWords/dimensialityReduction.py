@@ -2,7 +2,7 @@ from sklearn.decomposition import TruncatedSVD
 
 from sklearn.feature_selection import chi2
 
-from sklearn.feature_selection import SelectKBes
+from sklearn.feature_selection import SelectKBest
 
 import numpy as np
 
@@ -16,9 +16,9 @@ def dimensialityReduction(DTM , labels , lsi , numberOfComponents):
 			return: a reduced dimension matrix
 	"""
 
-	Y_ = np.zeros((1,len(labels))
-	Y_[0] = np.array( [ y for (n,y) in labels ] )
-	Y = Y_.transpose()
+	X = np.zeros((1,len(labels)))
+	X[0] = np.array( [ y for (n,y) in labels ] )
+	Y = X.transpose()
 
 
 	if lsi:
@@ -27,4 +27,4 @@ def dimensialityReduction(DTM , labels , lsi , numberOfComponents):
 	else:
 		reducedMatrix = SelectKBest(chi2 , k=numberOfComponents ).fit_transform(DTM, Y)
 
-	return reducedMatrix
+	return (reducedMatrix , Y)
