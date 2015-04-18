@@ -71,15 +71,21 @@ sett = set(document.split())
 print len(sett)
 print len(G.nodes())
 print G.edges()
-
 deg_centrality = nx.degree_centrality(G)
 eig_centrality = nx.eigenvector_centrality(G)
 print(deg_centrality)
 print(eig_centrality)
-
+degs = [(v,k) for k,v in deg_centrality.iteritems()]
+degs.sort()
+degs.reverse()
+eigs = [(v,k) for k,v in eig_centrality.iteritems()]
+eigs.sort()
+eigs.reverse()
+print(eigs)
+print(degs)
 plt.figure(1)
 pos=nx.spring_layout(G)
 nx.draw_networkx(G,pos=pos,node_size=500,node_color='w',edge_color='y',style='dashed', font_color='k',font_weight='bold')
+plt.draw()
 plt.show()
-
 

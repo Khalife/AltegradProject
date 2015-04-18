@@ -51,3 +51,23 @@ def documentWordMatrix(documents , window , directed , weighted):
 
 	return (DWM , presenceMatrix , avdl, lengths , words)
 
+<<<<<<< Updated upstream
+=======
+
+path = '../data/r8_train_stemmed.txt'
+trainData = True
+
+data = loadData(path,trainData)
+
+documents = data['documents']
+
+directed = True
+weighted = False
+window = 4
+print('computing DW MATRIX')
+(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,window , directed , weighted)
+
+
+
+
+>>>>>>> Stashed changes
