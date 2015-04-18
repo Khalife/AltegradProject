@@ -16,9 +16,10 @@ def dimensialityReduction(DTM , labels , lsi , numberOfComponents):
 			return: a reduced dimension matrix
 	"""
 
-	X = np.zeros((1,len(labels)))
-	X[0] = np.array( [ y for (n,y) in labels ] )
-	Y = X.transpose()
+	#X = np.zeros((1,len(labels)))
+	#X[0] = np.array( [ y for (n,y) in labels ] )
+	#Y = X.transpose()
+	Y = np.array( [ y for (n,y) in labels ] )
 
 
 	if lsi:

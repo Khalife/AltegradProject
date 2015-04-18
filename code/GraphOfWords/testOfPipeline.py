@@ -22,14 +22,12 @@ labels = data['labels']
 (dictionnaryOfClasses , labelsInNumbers) = labelDictionnary(labels)
 
 lsi = True
-numberOfComponents = 100
+numberOfComponents = 50
 
 (reducedMatrix , Y) = dimensialityReduction(X , labelsInNumbers , lsi , numberOfComponents)
 
-print Y
-print reducedMatrix
 
-svm = True
+svm = False
 
 scores = training(reducedMatrix , Y , svm )
 
