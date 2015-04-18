@@ -15,7 +15,8 @@ def documentTermMatrix(documents , window , directed , weighted, parameter):
 	"""
 
 	(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,window , directed , weighted)
-	(numberOfDocuments , numberOfWords) = DWM.shape()
+	numberOfDocuments = len(lengths)
+	numberOfWords = len(words)
 	termDocumentOccurence = np.sum(presenceMatrix , axis = 0)
 	auxilary = numberOfDocuments * np.ones( numberOfWords )
 	IDF_ = np.divide(auxilary , termDocumentOccurence)
