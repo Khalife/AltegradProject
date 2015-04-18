@@ -46,28 +46,18 @@ def documentWordMatrix(documents , window , directed , weighted):
 		for iterator in range(len(words)):
 			word = words[iterator]
 			if word in G.nodes():
-				DWM[documentNumber - 1][iterator] = G.in_degree(word) * (not weighted) * directed + G.degree(word) * (not weighted) * (not directed) + 
+				weightedDegree = 0
+				if weighted:
+					if directed:
+						for weightedEdge in G.in_edges_iter(word , True):
+							weightedDegree += weightedEdge[2]['weighted']
+					else:
+						for weightedEdge in G.edges_iter(word , True):
+							weightedDegree += weightedEdge[2]['weighted']
+
+					
+				DWM[documentNumber - 1][iterator] = G.in_degree(word) * (not weighted) * directed + G.degree(word) * (not weighted) * (not directed) + weightedDegree * weighted
 				presenceMatrix[documentNumber - 1][iterator] = 1
 
 	return (DWM , presenceMatrix , avdl, lengths , words)
 
-<<<<<<< Updated upstream
-=======
-
-path = '../data/r8_train_stemmed.txt'
-trainData = True
-
-data = loadData(path,trainData)
-
-documents = data['documents']
-
-directed = True
-weighted = False
-window = 4
-print('computing DW MATRIX')
-(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,window , directed , weighted)
-
-
-
-
->>>>>>> Stashed changes
