@@ -22,13 +22,13 @@ def documentTermMatrix(documents , window , directed , weighted, parameter):
 	IDF_ = np.divide(auxilary , termDocumentOccurence)
 	IDF = mtlib.repmat(IDF_ , numberOfDocuments ,1)
 
-	pivotMatrix = np.array((numberOfDocuments , numberOfWords))
+	pivotMatrix = np.ones((numberOfDocuments , numberOfWords))
 	for length in lengths:
 		documentNumber = length[0]
 		documentLength = length[1]
-		pivotMatrix[ documentNumber - 1 ] = 1/(1 - parameter + parameter * documentLength / avdl) * np.ones(numberOfWords)
+		pivotMatrix[ documentNumber - 1 ][:] = (1 - parameter + (parameter * documentLength / avdl) ) * np.ones(numberOfWords)
 
-	TWM = np.multiply(DWM , pivotMatrix)
+	TWM = np.divide(DWM , pivotMatrix)
 
 	TW_IDF = np.multiply(TWM , IDF)
 
@@ -39,7 +39,7 @@ trainData = True
 
 data = loadData(path,trainData)
 
-documents = data['documents']
+documents = data['documents'][:10]
 
 directed = True
 weighted = False
