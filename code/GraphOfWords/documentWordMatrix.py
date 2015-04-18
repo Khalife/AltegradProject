@@ -46,21 +46,8 @@ def documentWordMatrix(documents , window , directed , weighted):
 		for iterator in range(len(words)):
 			word = words[iterator]
 			if word in G.nodes():
-				DWM[documentNumber - 1][iterator] = G.in_degree(word) * (not weighted) * directed + G.degree(word) * (not weighted) * (not directed)
+				DWM[documentNumber - 1][iterator] = G.in_degree(word) * (not weighted) * directed + G.degree(word) * (not weighted) * (not directed) + 
 				presenceMatrix[documentNumber - 1][iterator] = 1
 
 	return (DWM , presenceMatrix , avdl, lengths , words)
 
-
-path = '../data/r8_train_stemmed.txt'
-trainData = True
-
-data = loadData(path,trainData)
-
-documents = data['documents']
-
-directed = True
-weighted = False
-window = 4
-
-(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,window , directed , weighted)

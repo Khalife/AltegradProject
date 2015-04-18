@@ -32,3 +32,18 @@ def documentTermMatrix(documents , window , directed , weighted, parameter):
 	TW_IDF = np.multiply(TWM , IDF)
 
 	return (TWM , IDF , TW_IDF)
+
+path = '../data/r8_train_stemmed.txt'
+trainData = True
+
+data = loadData(path,trainData)
+
+documents = data['documents']
+
+directed = True
+weighted = False
+window = 4
+
+parameter = .003
+
+(TWM , IDF , TW_IDF) = documentTermMatrix(documents , window , directed , weighted, parameter)
