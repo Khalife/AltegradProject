@@ -2,7 +2,7 @@ from documentWordMatrix import documentWordMatrix
 
 import numpy as np 
 
-import numpy.matlib as mtlb
+import numpy.matlib as mtlib
 
 def documentTermMatrix(documents , window , directed , weighted, parameter):
 	""" def documentTermMatrix(documents , window , directed , weighted):
