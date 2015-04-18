@@ -2,6 +2,8 @@ from documentWordMatrix import documentWordMatrix
 
 import numpy as np 
 
+from loadData import loadData
+
 import numpy.matlib as mtlib
 
 def documentTermMatrix(documents , window , directed , weighted, parameter):
