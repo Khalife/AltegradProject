@@ -91,7 +91,7 @@
 
 We subdivided the task into three stages. First, we load the data and construct the document-term matrix, we reduce its dimensions and then we apply the learning method on it.~\\
 ~\\
-To get a document term matrix, we use the TW-IDF measure presented in \cite{rousseau2013graph}. So we made a function $'extractGraph.py'$ that extracts a graph from a document using the $networkx$ library. This function can constructs a graph that can be weighted or not and directed or not. We can also tune in the window size through the argument $window$. That is when we introduce the function $'documentWordMatrix'$ that constructs obviously a document word matrix. In this matrix, we use the previous function to get the weights of each word depending on the graph and using the same approach as in \cite{rousseau2013graph}. Finally, we use the TW-IDF measure to calculate the document term matrix.\\
+To get a document term matrix, we use the TW-IDF measure presented in [1]. So we made a function $'extractGraph.py'$ that extracts a graph from a document using the $networkx$ library. This function can constructs a graph that can be weighted or not and directed or not. We can also tune in the window size through the argument $window$. That is when we introduce the function $'documentWordMatrix'$ that constructs obviously a document word matrix. In this matrix, we use the previous function to get the weights of each word depending on the graph and using the same approach as in \cite{rousseau2013graph}. Finally, we use the TW-IDF measure to calculate the document term matrix.\\
 
 For the dimensionality reduction, we had two choices. Either, we use the Chi-square method or the Latent Semantic Indexing(LSI) in order to get a tractable matrix. Indeed, there are $14575$ words in the train corpus. Both methods are already implemented on the $'sci-kit learn'$ library. \\
 
@@ -127,9 +127,9 @@ We state here the results for a directed unweighted graph with a window of size 
 We did not have time to test other centrality measures for the graph construction. We could of used the eigenvector centrality which captures global properties of the document. It would of course take more time to compute since the $'networkx.eig_centrality'$ matrix powers to get the eigenvalues but it would be interesting to compare it to our results with a method that captures local properties of the document.
 \section*{2 Bag of words approach:}
 
-We kept nearly the same configuration as in the first part: we kept Latent semantic indexing, which performs SVD to the Document-term matrix.
+We kept nearly the same configuration as in the first part: we kept Latent semantic indexing, which performs SVD to the Document-term matrix. 
 The main question here was to find the number of dimensions to keep. In Reuters-21578 R8 dataset, there are $5485$ samples on the train set and $2189$ on the test set. Building the document term matrix and applying TF-IDF method yield features of size $14575$ (total number of word). 
-We kept SVM for classification following the work of Thorsten Joachims ("Text categorization with support vector machines: Learning with many relevant features").
+We kept SVM for classification following [2]. The SVD has been performed in two steps : one time on the train set and a second one on the test set.
 \subsection*{Results}
 With cross-validation (10 values for C and $\gamma$ with a radius basis function kernel), keeping a dimension of 100 after dimensionality reduction yields :~\\
 ~\\
@@ -142,6 +142,18 @@ Macro-averaging recall : 0.242023076066~\\
 
 In conclusion, the bag of words representation did better in general comparing with the graph of words representation except for the macro-averaging precision. We do not know how to interpret this last remark. Otherwise, we should investigate in the future, the effect of a global property graph like PageRank for instance.
 
-\bibliography{references.bib}
+\begin{thebibliography}{9}
+	\bibitem{latexcompanion} 
+	Rousseau, Fran{\c{c}}ois and Vazirgiannis, Michalis~\\
+	\textit{Graph-of-word and TW-IDF: new approach to ad hoc IR,}. 
+	 Proceedings of the 22nd ACM international conference on Conference on information \& knowledge management, pages 59-68,
+	2013, ACM
+	
+	\bibitem{latexcompanion}
+	Thorsten Joachims~\\
+	\textit{Text categorization with support vector machines: Learning with many relevant features}
+	In Proceedings of the 10th European Conference on Machine Learning, ECML ’98, pages 137–142, London, UK, 1998. Springer-Verlag.
+	
 
+\end{thebibliography}
 \end{document}
