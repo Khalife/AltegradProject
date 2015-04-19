@@ -11,5 +11,4 @@ def toTFIDF(contents):
 	transformer = TfidfTransformer()
 	Tfidf = transformer.fit_transform(X)
 	T=Tfidf.toarray()
-	return T - tile(mean(T,1),(shape(T)[1],1)).transpose() 
-	return X - tile(mean(X,1),(shape(X)[1],1)).transpose()
+	return T #- tile(mean(T,1),(shape(T)[1],1)).transpose() 
