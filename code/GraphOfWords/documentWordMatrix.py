@@ -9,7 +9,7 @@ import numpy as np
 import multiprocessing 
 
 
-def documentWordMatrix(documents , window , directed , weighted):
+def documentWordMatrix(documents , train , window , directed , weighted):
 	""" def documentWordMatrix(documents , directed , weighted):
 			documents: is the set of documents loaded.
 			window: is the number of words considered at a time 
@@ -28,7 +28,7 @@ def documentWordMatrix(documents , window , directed , weighted):
 	avdl = 0
 
 	for document in documents:
-		(documentNumber , length , G) = extractGraph(document,window,directed,weighted)
+		(documentNumber , length , G) = extractGraph(document, train ,window,directed,weighted)
 		graphs.append( (documentNumber , G) )
 		lengths.append( (documentNumber , length) )
 		listOfWords += G.nodes()

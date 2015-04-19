@@ -19,7 +19,10 @@ def loadData(path,trainData):
 				document = (documentNumber , content[1:])
 				documents.append(document)
 			else:
-				document = (documentNumber , content)
+				content = line.split()
+				label = (documentNumber , content[0])
+				labels.append(label)
+				document = (documentNumber , content[1:])
 				documents.append(document)
 			documentNumber += 1
 

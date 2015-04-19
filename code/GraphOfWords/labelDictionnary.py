@@ -11,7 +11,7 @@ def labelDictionnary(labels):
 	strippedLabels = [ y for (n,y) in labels ]
 	classes = list( set(strippedLabels) )
 	
-	dictionnaryOfClasses = { label : classes.index(label)+1 for label in classes }
+	dictionnaryOfClasses = { label : classes.index(label) for label in classes }
 
 	labelsInNumbers = [ (n , dictionnaryOfClasses[y] ) for (n,y) in labels ]
 

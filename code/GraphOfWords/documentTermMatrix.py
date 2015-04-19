@@ -4,7 +4,7 @@ import numpy as np
 from loadData import loadData
 import numpy.matlib as mtlib
 
-def documentTermMatrix(documents , window , directed , weighted, parameter):
+def documentTermMatrix(documents , train , window , directed , weighted, parameter):
 	""" def documentTermMatrix(documents , window , directed , weighted):
 			documents: is the set of documents loaded.
 			window: is the number of words considered at a time 
@@ -14,7 +14,7 @@ def documentTermMatrix(documents , window , directed , weighted, parameter):
 			returns: 
 	"""
 
-	(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,window , directed , weighted)
+	(DWM , presenceMatrix , avdl, lengths , words) = documentWordMatrix(documents ,train , window , directed , weighted)
 	numberOfDocuments = len(lengths)
 	numberOfWords = len(words)
 	termDocumentOccurence = np.sum(presenceMatrix , axis = 0)
@@ -33,20 +33,3 @@ def documentTermMatrix(documents , window , directed , weighted, parameter):
 	TW_IDF = np.multiply(TWM , IDF)
 
 	return (TWM , IDF , TW_IDF)
-
-path = '../data/r8_train_stemmed.txt'
-trainData = True
-
-data = loadData(path,trainData)
-
-documents = data['documents']
-
-directed = True
-weighted = False
-window = 4
-
-parameter = .003
-
-(TWM , IDF , TW_IDF) = documentTermMatrix(documents , window , directed , weighted, parameter)
-
-np.savetxt('twidf_window4_directed_weighted' , TW_IDF , delimiter = ',')

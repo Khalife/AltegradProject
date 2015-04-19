@@ -4,7 +4,7 @@ from loadData import loadData
 
 import matplotlib.pyplot as plt
 
-def extractGraph(document,window,directed,weighted):
+def extractGraph(document, train , window,directed,weighted):
 	"""def extractGraph(documentList):
 			document: is a string representing the document
 			window: is the number of words considered at a time 
@@ -14,10 +14,13 @@ def extractGraph(document,window,directed,weighted):
 			returns: a graph of words for the document.
 	"""
 
-	documentNumber = document[0]
-	document = document[1][0]
-
-	documentList = document.split()
+	if train:
+		documentNumber = document[0]
+		document = document[1][0]
+		documentList = document.split()
+	else:
+		documentNumber = document[0]
+		documentList = document[1]
 
 	length = len(documentList)
 
