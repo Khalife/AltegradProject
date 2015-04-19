@@ -1,12 +1,13 @@
-from numpy import dot
-from numpy import transpose
-from numpy import linalg
-from numpy import argsort
+def pca(matrix,dimension):
+	""" performs PCA on matrix
+		dimension is the dimension of the projection
+		returns a projection into a lower dimension embedding"""
+	Mean=mean(matrix,axis=0);
+	M=reshape(Mean,data.shape[0],1);
+	C=matrix-M;
+	W=dot(transpose(C),C);
+	S,U= linalg.eig(W);
 
-def PCA(T):
-	W=dot(transpose(T),T)
-	eig_vals, eig_vecs = linalg.eig(W)
-	sort_perm = argsort(eig_vals)[::-1]
-	eig_vals.sort()     # <-- This sorts the list in place.
-	eig_vecs = eig_vecs[:,sort_perm]
-	return eig_vecs
+	perm=argsort(S)[::-1];
+	U=U[:,perm];
+	return dot(C,U[:,:dimension]);
