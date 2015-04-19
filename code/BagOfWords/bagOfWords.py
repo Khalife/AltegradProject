@@ -19,7 +19,6 @@ from sklearn.random_projection import sparse_random_matrix
 # 1- 
 disp('Preprocessing')
 with open('../data/r8_train_stemmed.txt') as lines:
-#with open('r8_train_stemmed.txt') as lines:
     labels = []
     contents = []
     for line in lines:
@@ -39,10 +38,10 @@ Y_train = transformLabels(labels)
 # ########################################################
 # # 2. Learning and Cross validation 
 # # disp('Cross Validation...')
-n_test=5
-n_cross=5
-c=linspace(0.1,5,n_cross)
-Gamma=linspace(0.1,5,n_cross)
+n_test=10
+n_cross=10
+c=linspace(1,n_cross,n_cross)
+Gamma=linspace(1,n_cross,n_cross)
 error=zeros(n_cross*n_cross)
 
 for i in range(n_cross):

@@ -87,12 +87,23 @@
 \end{center}
 
 \section*{1 Bag of words}
-
+\subsection*{Method}
+\subsubsection*{Preprocessing and training}
+We kept Latent semantic indexing, which performs SVD to the Document-term matrix.
+The main question here was to find the number of dimensions to keep. In Reuters-21578 R8 dataset, there are 5485 samples on the train set and 2189 on the test set. Building the document term matrix and applying TF-IDF method yield features of size 14575 (total number of word). 
+We kept SVM for classification following the work of Thorsten Joachims ("Text categorization with suport vector machines: Learning with many relevant features").
 \subsection*{Results}
-
+With cross-validation (10 values for C and 10 values for $\gamma$, with 10 splits over the train set, with a radius basis function kernel for the SVM), keeping a dimension of 100 after dimensionality reduction yields :~\\
+~\\
+Micro-averaging precision : 0.781635449977~\\
+Macro-averaging precision : 0.198438628628~\\
+Micro-averaging recall : 0.781635449977~\\
+Macro-averaging recall : 0.242023076066~\\
+~\\
+Unfortunately we could not track the reasons of the poor quality of the results.
 \section*{2 Graphs}
 
 \subsection*{Results}
 
-
+\bibliography{references.bib}
 \end{document}
