@@ -26,6 +26,7 @@ with open('../data/r8_train_stemmed.txt') as lines:
         [label, content] = line.split('\t')
         labels.append(label)
         contents.append(content)
+print labels[0]
 
 T=toTFIDF(contents)
 print shape(T)
@@ -35,13 +36,13 @@ svd.fit(T)
 X_train = svd.transform(T)
 Y_train = transformLabels(labels)
 
-########################################################
-# 2. Learning and Cross validation 
-# disp('Cross Validation...')
+# ########################################################
+# # 2. Learning and Cross validation 
+# # disp('Cross Validation...')
 n_test=5
 n_cross=5
-c=linspace(0.1,1,n_cross)
-Gamma=linspace(0.1,1,n_cross)
+c=linspace(0.1,5,n_cross)
+Gamma=linspace(0.1,5,n_cross)
 error=zeros(n_cross*n_cross)
 
 for i in range(n_cross):
@@ -62,8 +63,8 @@ gamma_ = Gamma[( index_min - index1)/n_cross]
 clf = svm.SVC(kernel='rbf', C=C_, gamma = gamma_).fit(X_train, Y_train)
 #clf = svm.SVC(kernel='rbf',C=1).fit(X_train,Y_train)
 
-########################################################
-# 3.  
+# ########################################################
+# # 3.  
 disp('Preprocessing on test set')
 with open('../data/r8_test_stemmed.txt') as lines:
     labels = []
@@ -79,7 +80,8 @@ print 'PCA test...'
 svd.fit(T) 
 X_test = svd.transform(T)
 Y_test = transformLabels(labels)
-
+print labels[0]
+print labels[1]
 error_ = clf.score(X_test,Y_test)
 print error_
 

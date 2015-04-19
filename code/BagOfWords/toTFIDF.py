@@ -10,5 +10,6 @@ def toTFIDF(contents):
 	X=X_.toarray()	# under array form  : Document Word Matrix	
 	transformer = TfidfTransformer()
 	Tfidf = transformer.fit_transform(X)
-	T=Tfidf.toarray() # centered TF IDF matrix
-	return T- tile(mean(T,1),(shape(T)[1],1)).transpose() 
+	T=Tfidf.toarray()
+	return T - tile(mean(T,1),(shape(T)[1],1)).transpose() 
+	return X - tile(mean(X,1),(shape(X)[1],1)).transpose()
