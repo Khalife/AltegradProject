@@ -99,10 +99,43 @@ Micro-averaging precision : 0.781635449977~\\
 Macro-averaging precision : 0.198438628628~\\
 Micro-averaging recall : 0.781635449977~\\
 Macro-averaging recall : 0.242023076066~\\
-~\\
+
 \section*{2 Graphs}
+\subsection*{Graph of words approach}
 
-\subsection*{Results}
+We subdivided the task into three stages. First, we load the data and construct the document-term matrix, we reduce its dimesions and then we aplly the learning method on it.~\\
+~\\
+To get a document term matrix, we use the TW-IDF measure presented in \cite{rousseau2013graph}. So we made a function $'extractGraph.py'$ that extracts a graph from a document using the $networkx$ library. This function can constructs a graph that can be weighted or not and directed or not. We can also tune in the window size through the argument $window$. That is when we introduce the function $'documentWordMatrix'$ that constructs obviously a document word matrix. In this matrix, we use the previous function to get the weights of each word depending on the graph and using the same aprroach as in \cite{rousseau2013graph}. Finally, we use the TW-IDF measure to calculate the document term matrix.\\
 
-\bibliography{references.bib}
+For the dimensionality reduction, we had two choices. Either, we use the Chi-square method or the Latent Semantic Indexing(LSI) in order to get a tractable matrix. Indeed, there are $ $ words in the train corpus. Both methods are already implemented on the $'sci-kit learn'$ library. \\
+
+In the third step, we choose two ways to learn. We compared the SVM and the AdaBoost algorithms. We used cross-validation on the train data to choose between the different parameters. SVM performed naturally better than Adaboost , as did the LSI. We reduced the dimension to $100$ since it yielded the best results.\\
+
+There were two ways to test: either we construct a document term matrix for the train set and the test set separatly, or we could of constructed the matrix for the whole corpus and then divide it into a train matrix and a test one. The last approach is done so as to make sure that words that are not common for the test and train data sets are all taken into account.\\
+
+We state here the results for a directed unweighted graph with a window of size $4$. We reduce the dimension to $100$ and we apply SVM: for the approach where we get the matrices :\\
+\begin{itemize}
+	 \item separatly: \begin{itemize}
+	 	\item Microaveraging \begin{itemize}
+	 		\item precision: $0.640475102787$ 
+	 		\item recall: $0.640475102787$
+	 	\end{itemize}
+	 	\item Macroaveraging \begin{itemize}
+	 		\item precision: $0.170622860994$
+	 		\item recall: $0.203406087815$
+	 	\end{itemize}
+	 \end{itemize}
+	 
+	 \item jointly: \begin{itemize}
+	 	\item Microaveraging \begin{itemize}
+	 		\item precision: $0.667428049338$ 
+	 		\item recall: $0.667428049338$
+	 	\end{itemize}
+	 	\item Macroaveraging \begin{itemize}
+	 		\item precision: $0.631236989331$
+	 		\item recall: $0.229378369$
+	 	\end{itemize}
+	 \end{itemize}
+\end{itemize}
+
 \end{document}
