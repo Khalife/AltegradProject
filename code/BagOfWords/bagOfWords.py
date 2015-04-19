@@ -1,4 +1,3 @@
-
 from loadData import loadData
 import random as rnd
 from numpy import *
@@ -7,7 +6,7 @@ import matplotlib.cm as cm
 from matplotlib import rc
 import math
 from sklearn.feature_extraction.text import TfidfTransformer
-from tfidf import tfidf
+#from tfidf import tfidf
 #from gensim import corpora, models, similarities
 from sklearn.feature_extraction.text import CountVectorizer
 from time import time
@@ -22,25 +21,31 @@ from sklearn import preprocessing
 
 trainData = True 
 path = "../data/r8_train_stemmed.txt"
-data = loadData(path,trainData)
-labels = data["labels"]
-contents = data["documents"]
-
-
-N = len(lines)
+#data = loadData(path,trainData)
+with open(path,'r') as File:
+	lines = [line.strip() for line in File]
+	labels = []
+	contents = []
+	for line in lines:
+		[label,content]=line.split('\t')
+    	labels.append(label)
+    	contents.append(content)
+print contents
+#labels = data["labels"]
+#contents = data["documents"]
 #print shape(contents)
 vectorizer = CountVectorizer(min_df=1)
 X_ = vectorizer.fit_transform(contents) # under Hashed form
 X=X_.toarray()	# under array form : Document Word Matrix
 
+
 # Perform dimensionality reduction over X (SVD)
-<<<<<<< HEAD:main.py
+
 # print shape(X)
 disp('Preprocessing...')
-=======
+
 #print shape(X)
 print "Preprocessing..."
->>>>>>> bf1242a3f565f91aa5924b64dc4a77de4649a62c:code/BagOfWords/bagOfWords.py
 
 transformer = TfidfTransformer()
 Tfidf = transformer.fit_transform(X)
@@ -56,14 +61,17 @@ U200=U[:,0:200]
 ##S200=diag(s)[:200,:200]
 ##X200=dot(dot(U200,S200),V200)
 #
-X=dot(T,U)
+print shape(X_)
+print shape(T)
+print shape(U)
+X=dot(T,U200)
 
 # # samples in column, features in lines
 Xtrain = X
 le = preprocessing.LabelEncoder()
 le.fit(labels)
 Ytrain=le.transform(labels) 
-
+#
 savetxt('Xtrain.txt',Xtrain)
 savetxt('Ytrain.txt',Ytrain)
 
