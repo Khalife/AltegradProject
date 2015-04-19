@@ -45,9 +45,9 @@ def  training(matrix , Y , SVM ):
 	recall_micro_scorer = metrics.make_scorer( custom_recall_micro_score )
 	recall_macro_scorer = metrics.make_scorer( custom_recall_macro_score )
 
-	precision_micro = cross_val_score(classifier, matrix , Y , cv=5, scoring=precision_micro_scorer)
-	precision_macro = cross_val_score(classifier, matrix , Y , cv=5, scoring=precision_macro_scorer)
-	recall_micro = cross_val_score(classifier, matrix , Y , cv=5, scoring=recall_micro_scorer)
-	recall_macro = cross_val_score(classifier, matrix , Y , cv=5, scoring=recall_macro_scorer)
+	precision_micro = cross_val_score(classifier, matrix , Y , cv=10 , scoring=precision_micro_scorer)
+	precision_macro = cross_val_score(classifier, matrix , Y , cv=10 , scoring=precision_macro_scorer)
+	recall_micro = cross_val_score(classifier, matrix , Y , cv=10 , scoring=recall_micro_scorer)
+	recall_macro = cross_val_score(classifier, matrix , Y , cv=10 , scoring=recall_macro_scorer)
 
 	return {'micro': (precision_micro , recall_micro) , 'macro' : (precision_macro , recall_macro)}
