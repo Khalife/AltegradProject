@@ -31,6 +31,8 @@ parameter = .003
 
 (TWM_train , IDF_train , TW_IDF_train) = documentTermMatrix(documents_train , trainData , window , directed , weighted, parameter)
 
+print TW_IDF_train.shape
+
 (dictionnaryOfClasses , labelsInNumbers_train) = labelDictionnary(labels_train)
 
 lsi = True

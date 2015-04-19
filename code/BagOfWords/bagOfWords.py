@@ -8,8 +8,8 @@ from time import time
 from sklearn import cross_validation
 from sklearn import datasets
 from sklearn import svm
+from sklearn import metrics
 from toTFIDF import toTFIDF
-from PCA import PCA
 from transformLabels import transformLabels
 from sklearn.decomposition import TruncatedSVD
 from sklearn.random_projection import sparse_random_matrix
@@ -79,10 +79,20 @@ print 'PCA test...'
 svd.fit(T) 
 X_test = svd.transform(T)
 Y_test = transformLabels(labels)
+<<<<<<< HEAD
 print labels[0]
 print labels[1]
 error_ = clf.score(X_test,Y_test)
 print error_
+=======
+
+Y_pred = clf.predict(X_test)
+
+print metrics.precision_score(Y_test, Y_pred, average='micro')
+print metrics.precision_score(Y_test, Y_pred, average='macro')
+print metrics.recall_score(Y_test, Y_pred, average='micro')
+print metrics.recall_score(Y_test, Y_pred, average='macro')
+>>>>>>> 42c3737b944aa73f33fd7b42cc6e5864a9465dd4
 
 
 
