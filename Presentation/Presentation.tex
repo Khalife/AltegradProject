@@ -1,0 +1,106 @@
+% This text is proprietary.
+% It's a part of presentation made by myself.
+% It may not used commercial.
+% The noncommercial use such as private and study is free
+% Nov. 2006
+% Author: Sascha Frank 
+% University Freiburg 
+% www.informatik.uni-freiburg.de/~frank/
+%
+% additional usepackage{beamerthemeshadow} is used
+%  
+%  \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+%  with this the elements which were coming soon were only hinted
+\documentclass{beamer}
+\usepackage{beamerthemeshadow}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc} 
+%\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm,asymmetric]{geometry}
+
+\usepackage{tkz-graph}
+\usepackage{amsmath}
+\usepackage{array,multirow,makecell}
+\usepackage{float}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{ stmaryrd }
+\usepackage{placeins}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+
+\begin{document}
+	\title{Text Categorization project}  
+	\author{Oussama Ennafii, Sammy Khalife \& Shuyu Dong}
+	\institute{ENS Cachan - Master MVA}
+	\date{\today} 
+	
+	
+	
+	\section{Introduction} 
+	
+	\frame{\titlepage} 
+	
+	\frame{
+		\frametitle{Introduction:}
+		
+		}
+		
+	\section{Graph Of words}
+	\subsection{Structure of code:}
+	\frame{
+		\frametitle{Structure of code:}
+		
+		The classification is done in three steps:
+		\begin{itemize}
+			\item[(1)] Constructing the document term matrix: to get this matrix we need three functions: the first one is to construct a graph of words from a document. The second gets a document word matrix in which each word in the corpus has a weight in each document. The third fucntion constructs the document term matrix corresponding to the TW-IDF measure.
+			\item[(2)] Reducing the dimension of the document term matrix using either LSI or Chi-Square.
+			\item[(3)] Learning over the train data set using the SVM or AdaBoost.
+		\end{itemize}
+		}
+		
+	\subsection{Experiments:}
+	
+	\frame{
+		\frametitle{Experiments:}
+		
+		\begin{itemize}
+			\item We did tried only a size window of $4$.
+			\item The unweighted directed graph yields better results than the other possible graphs. The difference is not that big though.
+			\item As suspected SVM is well suited for high dimensionnal problems so it does perform better. 
+			\item We project the data matrix into a $100$ dimension space using LSI. It does yield the highest resutls.
+			\item We had two choices either learn on the train set and test on the other set separatly, the problem would be that there are words that may not be common. As we will see there is a difference.
+		\end{itemize}
+		}
+		
+		\frame{
+			\frametitle{Results:}
+			\begin{itemize}
+				\item separatly: \begin{itemize}
+					\item Microaveraging \begin{itemize}
+						\item precision: $0.640475102787$ 
+						\item recall: $0.640475102787$
+					\end{itemize}
+					\item Macroaveraging \begin{itemize}
+						\item precision: $0.170622860994$
+						\item recall: $0.203406087815$
+					\end{itemize}
+				\end{itemize}
+				
+				\item jointly: \begin{itemize}
+					\item Microaveraging \begin{itemize}
+						\item precision: $0.667428049338$ 
+						\item recall: $0.667428049338$
+					\end{itemize}
+					\item Macroaveraging \begin{itemize}
+						\item precision: $0.631236989331$
+						\item recall: $0.229378369$
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+			}
+	
+\end{document}
