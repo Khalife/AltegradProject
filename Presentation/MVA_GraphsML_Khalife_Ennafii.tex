@@ -124,13 +124,13 @@
 			\begin{itemize}
 				\item LSI projection space dimension : 100 ($\text{Score}_{100} > max(\text{score}_{50}, \text{score}_{200})$)
 				\item Support Vector Machines kept (following Graph-of-word and TW-IDF: new approach to ad hoc IR)
-				\item What about cross validation? 
+				\item We used cross-validation for the choose of parameters C an $\gamma$ to decrease over-fitting 
 			\end{itemize}
 			}
 	\subsection{Results}
 		\frame{\frametitle{Results}
 			\begin{itemize}
-				\item "Separated" LSI
+				\item "Jointly" LSI
 				\begin{itemize}
 			\item Micro-averaging precision : 0.781635449977~\\
 			\item Macro-averaging precision : 0.198438628628~\\
