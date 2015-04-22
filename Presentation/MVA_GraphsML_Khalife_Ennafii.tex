@@ -49,36 +49,104 @@
 \subsection{Introduction}
 \frame{ \frametitle{Text data}
 \begin{itemize}
-	\item Reuters-21578 R8 data~\\
+	\item Reuters-21578 R8 data, 5485 samples train set, 2189 samples test set~\\
 	~\\
-	\item Train set : 5485 samples, Test set : 2189 samples
+	\item 8 class of documents to class using classical (bag of words) and new techniques (Graph of Words)~\\
+	~\\ 
 \end{itemize}
 }
-
-\section{Bag of words approach}
-\frame{
-	\frametitle{Bag of words - Method}
-}
-
-\frame{
-	\frametitle{Bag of Words - Results}
-}
-
-
-\section{Graphs of words method}
-
-\subsection{Method}
-
-\frame{
-	\frametitle{Graph of words - Method}
-}
-\subsection{Results}
-\frame{
-	\frametitle{Graph of words - Results}
-}
-
+	\section{Graph Of words}
+	\subsection{Structure of code:}
+	\frame{
+		\frametitle{Graphs - Structure of code:}
+		
+		The classification is done in three steps:
+		\begin{itemize}
+			\item[(1)] Constructing the document term matrix: to get this matrix we need three functions: the first one is to construct a graph of words from a document. The second gets a document word matrix in which each word in the corpus has a weight in each document. The third fucntion constructs the document term matrix corresponding to the TW-IDF measure.
+			\item[(2)] Reducing the dimension of the document term matrix using either LSI or Chi-Square.
+			\item[(3)] Learning over the train data set using the SVM or AdaBoost.
+		\end{itemize}
+	}
 	
-
+	\subsection{Experiments:}
+	
+	\frame{
+		\frametitle{Graphs - Experiments:}
+		
+		\begin{itemize}
+			\item We did tried only a size window of $4$.
+			\item The unweighted directed graph yields better results than the other possible graphs. The difference is not that big though.
+			\item As suspected SVM is well suited for high dimensionnal problems so it does perform better. 
+			\item We project the data matrix into a $100$ dimension space using LSI. It does yield the highest resutls.
+			\item We had two choices either learn on the train set and test on the other set separatly, the problem would be that there are words that may not be common. As we will see there is a difference.
+		\end{itemize}
+	}
+	
+	\frame{
+		\frametitle{Graphs - Results:}
+		\begin{itemize}
+			\item separatly: \begin{itemize}
+				\item Microaveraging \begin{itemize}
+					\item precision: $0.640475102787$ 
+					\item recall: $0.640475102787$
+				\end{itemize}
+				\item Macroaveraging \begin{itemize}
+					\item precision: $0.170622860994$
+					\item recall: $0.203406087815$
+				\end{itemize}
+			\end{itemize}
+			
+			\item jointly: \begin{itemize}
+				\item Microaveraging \begin{itemize}
+					\item precision: $0.667428049338$ 
+					\item recall: $0.667428049338$
+				\end{itemize}
+				\item Macroaveraging \begin{itemize}
+					\item precision: $0.631236989331$
+					\item recall: $0.229378369$
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	}
+	
+\section{Bag of words method}
+	\subsection{Structure of the code}
+		\frame{\frametitle{Bag of words - Method}
+			\begin{itemize}
+			\item Preprocessing on text data to build Document-term matrix 
+			\item Latent semantic indexing, which performs SVD to the Document-term matrix	
+			\item Training of a classifier (5185 samples)
+			\item Get score on the test data (2178 samples)
+			\end{itemize}
+			}
+	\subsection{Experiments}
+		\frame{\frametitle{Bag of words - Experiments}
+			\begin{itemize}
+				\item LSI projection space dimension : 100 ($\text{Score}_{100} > max(\text{score}_{50}, \text{score}_{200})$)
+				\item Support Vector Machines kept (following Graph-of-word and TW-IDF: new approach to ad hoc IR)
+				\item What about cross validation? 
+			\end{itemize}
+			}
+	\subsection{Results}
+		\frame{\frametitle{Results}
+			\begin{itemize}
+				\item "Separated" LSI
+				\begin{itemize}
+			\item Micro-averaging precision : 0.781635449977~\\
+			\item Macro-averaging precision : 0.198438628628~\\
+			\item Micro-averaging recall : 0.781635449977~\\
+			\item Macro-averaging recall : 0.242023076066~\\
+			\end{itemize}
+			\end{itemize}
+		}
+		
+\section{Conclusion}
+	\frame{\frametitle{Conclusion}
+		\begin{itemize}
+			\item Bag of words representation does better in general in comparison with the graph of words representation except for the macro-averaging precision
+			\item We should investigate in the future, the effect of a global property graph like PageRank
+			\end{itemize}
+		}
 \end{document}
 
 
